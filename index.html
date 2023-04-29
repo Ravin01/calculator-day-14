@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="calculator.css"> -->
+    <title>Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            min-height: 100vh;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .calculator {
+            height: 450px;
+            width: 300px;
+            box-shadow: 0px 0px 12px #5499C7;
+            /* margin: auto; */
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: #17202A;
+        }
+        
+        .screen {
+            width: 92%;
+            height: 130px;
+            border-radius: 12px;
+            background-color: #D5D8DC;
+            text-align: right;
+            font-size: 2rem;
+            color: #2C3E50;
+            border: none;
+            padding: 1rem;
+            margin-top: 10px;
+            margin-left: 9.5px;
+            box-shadow: 0px 0px 8px #17202A;
+        }
+        
+        .button {
+            display: grid;
+            grid-template-areas: 'main main main aside' 'main main main aside' 'main main main aside' 'main main main aside' 'main main main aside';
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            /* grid-template-rows: 0.5fr 0.5fr 0.5fr 0.5fr; */
+        }
+        
+        aside {
+            display: grid;
+            padding-top: 20px;
+            grid-area: aside;
+            column-gap: 15px;
+            row-gap: 5px;
+        }
+        
+        main {
+            /* display: flex; */
+            /* flex-wrap: wrap; */
+            /* justify-content: space-between; */
+            padding-top: 20px;
+            padding-left: 20px;
+            grid-area: main;
+        }
+        
+        button {
+            flex: 0 0 22%;
+            margin: 1px;
+            border: none;
+            font-weight: 600;
+            font-size: 22px;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #D5D8DC;
+        }
+        
+        .btn-number {
+            width: 53px;
+            height: 55px;
+            margin-bottom: 10px;
+            margin-left: 2px;
+            box-shadow: 0px 0px 8px #17202A;
+        }
+        
+        .btn-symbol {
+            width: 53px;
+            height: 40px;
+            box-shadow: 0px 0px 8px #17202A;
+        }
+        
+        .btn-number:hover,
+        .btn-symbol:hover {
+            box-shadow: 4px 4px 5px black;
+            background-color: aliceblue;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="calculator">
+        <div>
+            <input type="text" class="screen">
+        </div>
+        <div class="button">
+
+            <main>
+                <button type="button" class="btn btn-number" data-num="9">9</button>
+                <button type="button" class="btn btn-number" data-num="8">8</button>
+                <button type="button" class="btn btn-number" data-num="7">7</button>
+                <button type="button" class="btn btn-number" data-num="6">6</button>
+                <button type="button" class="btn btn-number" data-num="5">5</button>
+                <button type="button" class="btn btn-number" data-num="4">4</button>
+                <button type="button" class="btn btn-number" data-num="3">3</button>
+                <button type="button" class="btn btn-number" data-num="2">2</button>
+                <button type="button" class="btn btn-number" data-num="1">1</button>
+                <button type="button" class="btn btn-number" data-num="0">0</button>
+                <button type="button" class="btn btn-number" data-num=".">.</button>
+                <!-- <button type="button" class="btn-number" data-num="c">c</button> -->
+                <button type="button" class="btn btn-number btn-equal" data-num="">=</button>
+            </main>
+            <aside>
+                <button type="button" class="btn btn-symbol" data-num="+">+</button>
+                <button type="button" class="btn btn-symbol" data-num="-">-</button>
+                <button type="button" class="btn btn-symbol" data-num="*">*</button>
+                <button type="button" class="btn btn-symbol" data-num="/">/</button>
+                <button type="button" class="btn btn-symbol btn-clear" data-num="c">c</button>
+            </aside>
+        </div>
+
+    </section>
+
+
+    <!-- <script src="calculator.js"></script> -->
+    <script>
+        (function() {
+            let screen = document.querySelector('.screen');
+            let button = document.querySelectorAll('.btn');
+            let equal = document.querySelector('.btn-equal');
+            let clear = document.querySelector('.btn-clear');
+
+            //assign button
+            button.forEach(function(button) {
+                button.addEventListener('click', function(event) {
+                    let value = event.target.dataset.num;
+                    screen.value = screen.value + value;
+                })
+            });
+            //equal
+            equal.addEventListener('click', function(event) {
+                    if (screen.value === '') {
+                        screen.value = '';
+                    } else {
+                        let answer = eval(screen.value);
+                        screen.value = answer;
+                    }
+
+                })
+                //clear
+            clear.addEventListener('click', function(event) {
+                screen.value = '';
+            })
+
+
+        })();
+    </script>
+</body>
+
+</html>
